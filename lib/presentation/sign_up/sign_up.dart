@@ -1,10 +1,9 @@
 import 'package:admin_pannel/presentation/login/provider/auth_controller.dart';
-import 'package:admin_pannel/presentation/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AdminLoginPage extends ConsumerWidget {
-  AdminLoginPage({super.key});
+class SignUpPage extends ConsumerWidget {
+  SignUpPage({super.key});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -98,7 +97,7 @@ class AdminLoginPage extends ConsumerWidget {
 
               const SizedBox(height: 20),
 
-              /// LOGIN BUTTON
+              /// SIGN UP BUTTON
               SizedBox(
                 width: double.infinity,
                 height: 52,
@@ -122,63 +121,13 @@ class AdminLoginPage extends ConsumerWidget {
                   child: authState.isLoading
                       ? const CircularProgressIndicator(color: Colors.white)
                       : const Text(
-                          "Login as Admin",
+                          "Sign Up",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              const Text(
-                "Only authorized admins can access",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-
-              const SizedBox(height: 24),
-
-              const Text(
-                "OR",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-
-              const SizedBox(height: 16),
-
-              /// GOOGLE LOGIN
-              GestureDetector(
-                onTap: () {
-                  ref.read(authControllerProvider.notifier).loginWithGoogle();
-                },
-                child: const Text(
-                  "Login with Google",
-                  style: TextStyle(fontSize: 14, color: Colors.blue),
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              const Text(
-                "OR",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-
-              const SizedBox(height: 16),
-
-              /// SIGN UP
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => SignUpPage()),
-                  );
-                },
-                child: const Text(
-                  "Create an account",
-                  style: TextStyle(fontSize: 14, color: Colors.blue),
                 ),
               ),
             ],
