@@ -1,23 +1,24 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthState {
+class AuthhState {
   final bool isLoading;
   final String? error;
 
-  AuthState({this.isLoading = false, this.error});
+  AuthhState({this.isLoading = false, this.error});
 
-  AuthState copyWith({bool? isLoading, String? error}) {
-    return AuthState(isLoading: isLoading ?? this.isLoading, error: error);
+  AuthhState copyWith({bool? isLoading, String? error}) {
+    return AuthhState(isLoading: isLoading ?? this.isLoading, error: error);
   }
 }
 
-final authControllerProvider = StateNotifierProvider<AuthController, AuthState>(
-  (ref) => AuthController(),
-);
+final authhControllerProvider =
+    StateNotifierProvider<AuthController, AuthhState>(
+      (ref) => AuthController(),
+    );
 
-class AuthController extends StateNotifier<AuthState> {
-  AuthController() : super(AuthState());
+class AuthController extends StateNotifier<AuthhState> {
+  AuthController() : super(AuthhState());
 
   final _supabase = Supabase.instance.client;
 

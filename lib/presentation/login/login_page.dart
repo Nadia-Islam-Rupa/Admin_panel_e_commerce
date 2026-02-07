@@ -1,7 +1,10 @@
+import 'package:admin_pannel/presentation/home_dash/ui/home_page.dart';
 import 'package:admin_pannel/presentation/login/provider/auth_controller.dart';
 import 'package:admin_pannel/presentation/sign_up/sign_up.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminLoginPage extends ConsumerWidget {
   AdminLoginPage({super.key});
@@ -12,7 +15,19 @@ class AdminLoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeColor = const Color(0xFF2E7D32);
-    final authState = ref.watch(authControllerProvider);
+    final authState = ref.watch(authhControllerProvider);
+
+    /// 🔥 LISTEN FOR AUTH SUCCESS
+    ref.listen<AuthhState>(authhControllerProvider, (previous, next) {
+      final user = Supabase.instance.client.auth.currentUser;
+
+      if (user != null && context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+        );
+      }
+    });
 
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6F8),
@@ -107,7 +122,7 @@ class AdminLoginPage extends ConsumerWidget {
                       ? null
                       : () {
                           ref
-                              .read(authControllerProvider.notifier)
+                              .read(authhControllerProvider.notifier)
                               .login(
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
@@ -151,7 +166,7 @@ class AdminLoginPage extends ConsumerWidget {
               /// GOOGLE LOGIN
               GestureDetector(
                 onTap: () {
-                  ref.read(authControllerProvider.notifier).loginWithGoogle();
+                  ref.read(authhControllerProvider.notifier).loginWithGoogle();
                 },
                 child: const Text(
                   "Login with Google",
