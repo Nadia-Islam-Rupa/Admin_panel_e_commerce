@@ -111,6 +111,19 @@ class AdminLoginPage extends StatelessWidget {
                 "Only authorized admins can access",
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
+              const SizedBox(height: 24),
+              Center(
+                child: Text(
+                  "OR",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const SizedBox(width: 4),
+              const Text(
+                "Login with Google",
+                style: TextStyle(fontSize: 14, color: Colors.blue),
+              ),
             ],
           ),
         ),
