@@ -124,6 +124,19 @@ class AdminLoginPage extends StatelessWidget {
                 "Login with Google",
                 style: TextStyle(fontSize: 14, color: Colors.blue),
               ),
+              const SizedBox(height: 16),
+              Center(
+                child: Text(
+                  "OR",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const SizedBox(width: 4),
+              const Text(
+                "Create an account",
+                style: TextStyle(fontSize: 14, color: Colors.blue),
+              ),
             ],
           ),
         ),
