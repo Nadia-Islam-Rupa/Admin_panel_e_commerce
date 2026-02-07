@@ -11,10 +11,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.amber,
         title: Text("Admin Dashboard"),
       ),
-      body: Center(child: Column(children: [
+      body: Column(children: [
             
           ],
-        )),
+        ),
     );
   }
 }

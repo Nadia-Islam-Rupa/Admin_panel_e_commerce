@@ -1,4 +1,4 @@
-import 'package:admin_pannel/presentation/home_dash/ui/home_page.dart';
+import 'package:admin_pannel/presentation/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Supabase',
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
