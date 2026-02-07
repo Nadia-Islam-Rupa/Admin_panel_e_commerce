@@ -6,7 +6,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Admin Dashboard")),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.amber,
+        title: Text("Admin Dashboard"),
+      ),
+      body: Center(child: Column(children: [
+            
+          ],
+        )),
     );
   }
 }
