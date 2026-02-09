@@ -23,6 +23,14 @@ class HomePage extends StatelessWidget {
                 ContainerHome(color: Colors.teal[300]),
               ],
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ContainerHome(color: Colors.orange[200]),
+                ContainerHome(color: Colors.purple[300]),
+              ],
+            ),
           ],
         ),
       ),
