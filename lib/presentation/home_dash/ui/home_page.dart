@@ -19,16 +19,16 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ContainerHome(color: Colors.blue[200]),
-                ContainerHome(color: Colors.teal[300]),
+                ContainerHome(color: Colors.blue[300]),
+                ContainerHome(color: Colors.teal[400]),
               ],
             ),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ContainerHome(color: Colors.orange[200]),
-                ContainerHome(color: Colors.purple[300]),
+                ContainerHome(color: Colors.orange[300]),
+                ContainerHome(color: Colors.purple[400]),
               ],
             ),
           ],
