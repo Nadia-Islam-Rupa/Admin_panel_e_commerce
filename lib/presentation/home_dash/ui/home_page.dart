@@ -1,3 +1,4 @@
+import 'package:admin_pannel/presentation/category/ui/category_card.dart';
 import 'package:admin_pannel/presentation/home_dash/ui/container_home.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,8 @@ class HomePage extends StatelessWidget {
               "Manage Categories",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
+            CategoryCard(),
           ],
         ),
       ),
