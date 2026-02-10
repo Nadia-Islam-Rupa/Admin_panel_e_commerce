@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,6 +31,11 @@ class HomePage extends StatelessWidget {
                 ContainerHome(color: Colors.orange[300]),
                 ContainerHome(color: Colors.purple[400]),
               ],
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Manage Categories",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
