@@ -34,9 +34,22 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Text(
-              "Manage Categories",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Manage Categories",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Add New Category",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 10),
             SizedBox(
@@ -49,6 +62,7 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),
