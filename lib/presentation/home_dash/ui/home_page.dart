@@ -1,3 +1,4 @@
+import 'package:admin_pannel/presentation/category/ui/addnew_category.dart';
 import 'package:admin_pannel/presentation/category/ui/category_card.dart';
 import 'package:admin_pannel/presentation/home_dash/ui/container_home.dart';
 import 'package:admin_pannel/presentation/product/ui/add_product.dart';
@@ -51,7 +52,12 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddCategory()),
+                      );
+                    },
                     child: Text(
                       "Add New Category",
                       style: TextStyle(fontSize: 16, color: Colors.black),
