@@ -6,7 +6,7 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add New Product")),
+      appBar: AppBar(centerTitle: true, title: Text("Add New Product")),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
