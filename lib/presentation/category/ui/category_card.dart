@@ -5,31 +5,51 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      height: 150,
-      width: 180,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 80,
-            width: 180,
+    return GestureDetector(
+      onTap: () {
+        // context.push('/products/${category.id}');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(color: Color(0xFFE9E8E8), blurRadius: 10),
+          ],
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 120,
+              width: 120,
 
-            child: Image.network(
-              "https://becs-table.com.au/wp-content/uploads/2014/01/ice-cream-1.jpg",
-              fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                child: Image.network(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwClYnbUMUHxAlax5R5iONJ1VwV4AkyWqBOAuOm_KPw-MKp_DF5sA-oBKblJEn_0TzYPtHNi3QriGBmMYFh2jYctiSct8kl7RUGM10uA&s',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.image_not_supported);
+                  },
+                ),
+              ),
             ),
-          ),
-
-          SizedBox(height: 10),
-          Text("Total Users", style: TextStyle(fontSize: 18)),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                'Category Name',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
