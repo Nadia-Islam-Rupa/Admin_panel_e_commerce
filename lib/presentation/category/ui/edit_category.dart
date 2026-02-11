@@ -6,7 +6,7 @@ class EditCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(centerTitle: true, title: const Text('Edit Category')),
       body: Column(children: [
         
       ],),
