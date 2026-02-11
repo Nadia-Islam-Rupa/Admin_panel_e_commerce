@@ -29,7 +29,7 @@ class CategoryCard extends StatelessWidget {
                 ),
                 child: Image.network(
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwClYnbUMUHxAlax5R5iONJ1VwV4AkyWqBOAuOm_KPw-MKp_DF5sA-oBKblJEn_0TzYPtHNi3QriGBmMYFh2jYctiSct8kl7RUGM10uA&s',
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   width: double.infinity,
                   height: double.infinity,
                   errorBuilder: (context, error, stackTrace) {
