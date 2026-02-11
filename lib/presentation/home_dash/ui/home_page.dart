@@ -39,14 +39,14 @@ class HomePage extends StatelessWidget {
               children: [
                 Text(
                   "Manage Categories",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Add New Category",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Add New Category",
+                    style: TextStyle(fontSize: 16, color: Colors.blue),
                   ),
                 ),
               ],
