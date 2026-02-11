@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         title: Text("Admin Dashboard"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,10 +43,16 @@ class HomePage extends StatelessWidget {
                 ),
 
                 TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue[100],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
                   onPressed: () {},
                   child: Text(
                     "Add New Category",
-                    style: TextStyle(fontSize: 16, color: Colors.blue),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                 ),
               ],
