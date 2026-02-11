@@ -1,3 +1,4 @@
+import 'package:admin_pannel/presentation/category/ui/edit_category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -7,7 +8,10 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.push('/products/${category.id}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EditCategory()),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
