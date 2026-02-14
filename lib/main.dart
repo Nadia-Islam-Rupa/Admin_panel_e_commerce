@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Supabase',
-      // home: AdminLoginPage(),
+      //home: AdminLoginPage(),
       home: HomePage(),
     );
   }

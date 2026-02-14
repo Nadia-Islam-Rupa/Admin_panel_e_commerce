@@ -1,17 +1,30 @@
+import 'package:admin_pannel/data/category_data/category_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddCategory extends StatelessWidget {
+class AddCategory extends ConsumerStatefulWidget {
   const AddCategory({super.key});
 
   @override
+  ConsumerState<AddCategory> createState() => _AddCategoryState();
+}
+
+class _AddCategoryState extends ConsumerState<AddCategory> {
+  final nameController = TextEditingController();
+  final descController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final state = ref.watch(addCategoryProvider);
+
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Add New Category")),
+      appBar: AppBar(centerTitle: true, title: const Text("Add New Category")),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             TextField(
+              controller: nameController,
               decoration: InputDecoration(
                 labelText: "Category Name",
                 filled: true,
@@ -22,8 +35,10 @@ class AddCategory extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+
             TextField(
+              controller: descController,
               decoration: InputDecoration(
                 labelText: "Category Description",
                 filled: true,
@@ -34,25 +49,29 @@ class AddCategory extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 20),
 
-            SizedBox(height: 10),
-            Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(child: Text("Upload Image")),
-            ),
-            SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: () {
-                // Handle category addition logic here
-              },
-              child: Text("Add Category"),
-            ),
+            state.isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: () async {
+                      await ref
+                          .read(addCategoryProvider.notifier)
+                          .addCategory(
+                            name: nameController.text,
+                            description: descController.text,
+                            imageUrl: '',
+                          );
+
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Category Added")),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text("Add Category"),
+                  ),
           ],
         ),
       ),

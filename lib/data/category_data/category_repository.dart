@@ -10,7 +10,7 @@ class CategoryRepository {
     required String description,
     required String imageUrl,
   }) async {
-    await client.from('categories').insert({
+    await client.from('category').insert({
       'name': name,
       'description': description,
       'image_url': imageUrl,
