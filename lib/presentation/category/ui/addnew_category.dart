@@ -108,6 +108,10 @@ class _AddCategoryState extends ConsumerState<AddCategory> {
                   } catch (e) {
                     debugPrint("UI ERROR: $e");
 
+                    if (!context.mounted) {
+                      return;
+                    }
+
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text("Error: $e")));

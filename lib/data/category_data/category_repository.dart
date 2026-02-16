@@ -13,15 +13,15 @@ class CategoryRepository {
       final fileName =
           "${DateTime.now().millisecondsSinceEpoch}_${path.basename(file.path)}";
 
-      final response = await client.storage
-          .from('category')
-          .upload(fileName, file);
+      await client.storage.from('category').upload(fileName, file);
 
       final imageUrl = client.storage.from('category').getPublicUrl(fileName);
 
       return imageUrl;
+    } on StorageException catch (e) {
+      throw Exception("Image upload failed: ${e.message}");
     } catch (e) {
-      rethrow;
+      throw Exception("Unexpected upload error: $e");
     }
   }
 
@@ -31,21 +31,16 @@ class CategoryRepository {
     required File imageFile,
   }) async {
     try {
-      print("Starting addCategory...");
-
       final imageUrl = await uploadImage(imageFile);
 
-      print("Inserting into database...");
-
-      final response = await client.from('category').insert({
+      await client.from('category').insert({
         'name': name,
         'image_url': imageUrl,
-      }).select();
-
-      print("Insert response: $response");
+      });
+    } on PostgrestException catch (e) {
+      throw Exception("Database insert failed: ${e.message}");
     } catch (e) {
-      print("INSERT ERROR: $e");
-      rethrow;
+      throw Exception("Unexpected insert error: $e");
     }
   }
 
@@ -58,9 +53,10 @@ class CategoryRepository {
           .order('created_at', ascending: false);
 
       return response;
+    } on PostgrestException catch (e) {
+      throw Exception("Fetch failed: ${e.message}");
     } catch (e) {
-      print("FETCH ERROR: $e");
-      rethrow;
+      throw Exception("Unexpected fetch error: $e");
     }
   }
 }
