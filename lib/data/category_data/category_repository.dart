@@ -7,18 +7,22 @@ class CategoryRepository {
 
   CategoryRepository(this.client);
 
-  /// Upload image to Supabase Storage
+  /// Upload image
   Future<String> uploadImage(File file) async {
-    final fileName =
-        "${DateTime.now().millisecondsSinceEpoch}_${path.basename(file.path)}";
+    try {
+      final fileName =
+          "${DateTime.now().millisecondsSinceEpoch}_${path.basename(file.path)}";
 
-    await client.storage.from('category-images').upload(fileName, file);
+      final response = await client.storage
+          .from('category')
+          .upload(fileName, file);
 
-    final imageUrl = client.storage
-        .from('category-images')
-        .getPublicUrl(fileName);
+      final imageUrl = client.storage.from('category').getPublicUrl(fileName);
 
-    return imageUrl;
+      return imageUrl;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   /// Insert category
@@ -26,18 +30,37 @@ class CategoryRepository {
     required String name,
     required File imageFile,
   }) async {
-    final imageUrl = await uploadImage(imageFile);
+    try {
+      print("Starting addCategory...");
 
-    await client.from('category').insert({'name': name, 'image_url': imageUrl});
+      final imageUrl = await uploadImage(imageFile);
+
+      print("Inserting into database...");
+
+      final response = await client.from('category').insert({
+        'name': name,
+        'image_url': imageUrl,
+      }).select();
+
+      print("Insert response: $response");
+    } catch (e) {
+      print("INSERT ERROR: $e");
+      rethrow;
+    }
   }
 
-  /// Fetch all categories
+  /// Fetch categories
   Future<List<Map<String, dynamic>>> fetchCategories() async {
-    final response = await client
-        .from('category')
-        .select()
-        .order('created_at', ascending: false);
+    try {
+      final response = await client
+          .from('category')
+          .select()
+          .order('created_at', ascending: false);
 
-    return response;
+      return response;
+    } catch (e) {
+      print("FETCH ERROR: $e");
+      rethrow;
+    }
   }
 }

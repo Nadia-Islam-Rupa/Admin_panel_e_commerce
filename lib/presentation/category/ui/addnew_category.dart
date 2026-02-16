@@ -16,13 +16,17 @@ class _AddCategoryState extends ConsumerState<AddCategory> {
   File? selectedImage;
 
   Future<void> pickImage() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
+    try {
+      final picker = ImagePicker();
+      final picked = await picker.pickImage(source: ImageSource.gallery);
 
-    if (picked != null) {
-      setState(() {
-        selectedImage = File(picked.path);
-      });
+      if (picked != null) {
+        setState(() {
+          selectedImage = File(picked.path);
+        });
+      }
+    } catch (e) {
+      debugPrint("Image pick error: $e");
     }
   }
 
@@ -36,7 +40,7 @@ class _AddCategoryState extends ConsumerState<AddCategory> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// Name
+            /// Category Name
             TextField(
               controller: nameController,
               decoration: const InputDecoration(
@@ -63,26 +67,64 @@ class _AddCategoryState extends ConsumerState<AddCategory> {
             ),
             const SizedBox(height: 20),
 
-            /// Button
-            state.isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: () async {
-                      if (selectedImage == null) return;
+            /// Loading Indicator
+            if (state.isLoading) const CircularProgressIndicator(),
 
-                      await ref
-                          .read(addCategoryProvider.notifier)
-                          .addCategory(
-                            name: nameController.text,
-                            imageFile: selectedImage!,
-                          );
+            /// Add Button
+            if (!state.isLoading)
+              ElevatedButton(
+                onPressed: () async {
+                  if (nameController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Category name required")),
+                    );
+                    return;
+                  }
 
-                      if (context.mounted) {
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: const Text("Add Category"),
-                  ),
+                  if (selectedImage == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Please select image")),
+                    );
+                    return;
+                  }
+
+                  try {
+                    debugPrint("Calling addCategory...");
+
+                    await ref
+                        .read(addCategoryProvider.notifier)
+                        .addCategory(
+                          name: nameController.text.trim(),
+                          imageFile: selectedImage!,
+                        );
+
+                    debugPrint("Category added successfully");
+
+                    ref.invalidate(categoryListProvider);
+
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                  } catch (e) {
+                    debugPrint("UI ERROR: $e");
+
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                  }
+                },
+                child: const Text("Add Category"),
+              ),
+
+            /// Show Error Text (from Riverpod)
+            if (state.hasError)
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  state.error.toString(),
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
           ],
         ),
       ),
