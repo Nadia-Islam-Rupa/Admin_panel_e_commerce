@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:admin_pannel/data/category_data/category_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddCategory extends ConsumerStatefulWidget {
   const AddCategory({super.key});
@@ -11,7 +13,18 @@ class AddCategory extends ConsumerStatefulWidget {
 
 class _AddCategoryState extends ConsumerState<AddCategory> {
   final nameController = TextEditingController();
-  final descController = TextEditingController();
+  File? selectedImage;
+
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+
+    if (picked != null) {
+      setState(() {
+        selectedImage = File(picked.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,53 +33,51 @@ class _AddCategoryState extends ConsumerState<AddCategory> {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const Text("Add New Category")),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            /// Name
             TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Category Name",
-                filled: true,
-                fillColor: Colors.grey[300],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            TextField(
-              controller: descController,
-              decoration: InputDecoration(
-                labelText: "Category Description",
-                filled: true,
-                fillColor: Colors.grey[300],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
+                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
 
+            /// Image Picker
+            GestureDetector(
+              onTap: pickImage,
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: selectedImage == null
+                    ? const Center(child: Text("Select Image"))
+                    : Image.file(selectedImage!, fit: BoxFit.cover),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            /// Button
             state.isLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: () async {
+                      if (selectedImage == null) return;
+
                       await ref
                           .read(addCategoryProvider.notifier)
                           .addCategory(
                             name: nameController.text,
-                            description: descController.text,
-                            imageUrl: '',
+                            imageFile: selectedImage!,
                           );
 
                       if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Category Added")),
-                        );
                         Navigator.pop(context);
                       }
                     },

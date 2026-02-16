@@ -1,5 +1,6 @@
 import 'package:admin_pannel/presentation/category/ui/addnew_category.dart';
-import 'package:admin_pannel/presentation/category/ui/category_card.dart';
+
+import 'package:admin_pannel/presentation/category/ui/category_list_page.dart';
 import 'package:admin_pannel/presentation/home_dash/ui/container_home.dart';
 import 'package:admin_pannel/presentation/product/ui/add_product.dart';
 import 'package:flutter/material.dart';
@@ -66,16 +67,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              SizedBox(
-                height: 190,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return CategoryCard();
-                  },
-                ),
-              ),
+              SizedBox(height: 190, child: CategoryListPage()),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,16 +98,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              SizedBox(
-                height: 190,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return CategoryCard();
-                  },
-                ),
-              ),
             ],
           ),
         ),

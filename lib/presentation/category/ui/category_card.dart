@@ -1,61 +1,39 @@
-import 'package:admin_pannel/presentation/category/ui/edit_category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({super.key});
+  final String name;
+  final String imageUrl;
+
+  const CategoryCard({super.key, required this.name, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => EditCategory()),
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey[200],
-            boxShadow: const [
-              BoxShadow(color: Color(0xFFE9E8E8), blurRadius: 10),
-            ],
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 120,
-                width: 120,
-
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(10),
-                  ),
-                  child: Image.network(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwClYnbUMUHxAlax5R5iONJ1VwV4AkyWqBOAuOm_KPw-MKp_DF5sA-oBKblJEn_0TzYPtHNi3QriGBmMYFh2jYctiSct8kl7RUGM10uA&s',
-                    fit: BoxFit.fill,
-                    width: double.infinity,
-                    height: double.infinity,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Icon(Icons.image_not_supported);
-                    },
-                  ),
+    return SizedBox(
+      width: 150, // 👈 fixed width needed
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Text(
-                  'Category Name',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
