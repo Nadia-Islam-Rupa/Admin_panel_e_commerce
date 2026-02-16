@@ -17,7 +17,7 @@ class CategoryCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: 150, // 👈 fixed width needed
+        width: 150,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
