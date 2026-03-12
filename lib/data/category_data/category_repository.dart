@@ -59,4 +59,18 @@ class CategoryRepository {
       throw Exception("Unexpected fetch error: $e");
     }
   }
+
+  /// ✅ Update category
+  Future<void> updateCategory({
+    required String id,
+    required String name,
+  }) async {
+    try {
+      await client.from('category').update({'name': name}).eq('id', id);
+    } on PostgrestException catch (e) {
+      throw Exception("Update failed: ${e.message}");
+    } catch (e) {
+      throw Exception("Unexpected update error: $e");
+    }
+  }
 }
