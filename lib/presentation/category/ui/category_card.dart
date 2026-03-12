@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 class CategoryCard extends StatelessWidget {
   final String name;
   final String imageUrl;
+  final Map<String, dynamic> category;
 
-  const CategoryCard({super.key, required this.name, required this.imageUrl});
+  const CategoryCard({
+    super.key,
+    required this.name,
+    required this.imageUrl,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,9 @@ class CategoryCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EditCategory()),
+          MaterialPageRoute(
+            builder: (context) => EditCategory(category: category),
+          ),
         );
       },
       child: SizedBox(

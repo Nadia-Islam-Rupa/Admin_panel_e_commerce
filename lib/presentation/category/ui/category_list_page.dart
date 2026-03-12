@@ -27,6 +27,7 @@ class CategoryListPage extends ConsumerWidget {
                 child: CategoryCard(
                   name: category['name'],
                   imageUrl: category['image_url'],
+                  category: category,
                 ),
               );
             },
