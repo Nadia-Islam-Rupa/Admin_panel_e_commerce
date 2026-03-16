@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:admin_pannel/data/category_data/category_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import '../../../core/supabase_provider.dart';
+import '../../../../core/supabase_provider.dart';
 
 final categoryRepositoryProvider = Provider<CategoryRepository>((ref) {
   final client = ref.watch(supabaseProvider);

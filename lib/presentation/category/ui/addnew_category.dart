@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:admin_pannel/data/category_data/category_provider.dart';
+import 'package:admin_pannel/presentation/category/provider/category_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
