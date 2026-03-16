@@ -3,6 +3,7 @@ import 'package:admin_pannel/presentation/category/ui/addnew_category.dart';
 import 'package:admin_pannel/presentation/category/ui/category_list_page.dart';
 import 'package:admin_pannel/presentation/home_dash/ui/container_home.dart';
 import 'package:admin_pannel/presentation/product/ui/add_product.dart';
+import 'package:admin_pannel/presentation/product/ui/product_list_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -98,6 +99,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
+              SizedBox(height: 190, child: ProductListPage()),
             ],
           ),
         ),
