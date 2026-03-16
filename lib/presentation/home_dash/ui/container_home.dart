@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 
 class ContainerHome extends StatelessWidget {
+  final String title;
+  final String value;
+  final IconData icon;
   final Color? color;
-  const ContainerHome({super.key, this.color});
+  const ContainerHome({
+    super.key,
+    required this.title,
+    required this.value,
+    required this.icon,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12),
       height: 100,
-      width: 180,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),
@@ -21,9 +30,9 @@ class ContainerHome extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(Icons.category_outlined, size: 35, color: Colors.white),
+              Icon(icon, size: 35, color: Colors.white),
               Text(
-                "100",
+                value,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -33,10 +42,7 @@ class ContainerHome extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10),
-          Text(
-            "Total Users",
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
+          Text(title, style: TextStyle(fontSize: 18, color: Colors.white)),
         ],
       ),
     );

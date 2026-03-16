@@ -1,16 +1,30 @@
 import 'package:admin_pannel/presentation/category/ui/addnew_category.dart';
 
 import 'package:admin_pannel/presentation/category/ui/category_list_page.dart';
+import 'package:admin_pannel/presentation/home_dash/provider/dashboard_provider.dart';
 import 'package:admin_pannel/presentation/home_dash/ui/container_home.dart';
 import 'package:admin_pannel/presentation/product/ui/add_product.dart';
 import 'package:admin_pannel/presentation/product/ui/product_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalUsers = ref.watch(totalUserCountProvider);
+    final totalProducts = ref.watch(totalProductCountProvider);
+    final totalCategories = ref.watch(totalCategoryCountProvider);
+
+    String cardValue(AsyncValue<int> value) {
+      return value.when(
+        data: (count) => count.toString(),
+        loading: () => '...',
+        error: (_, _) => '0',
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,19 +37,32 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1.8,
                 children: [
-                  ContainerHome(color: Colors.blue[300]),
-                  ContainerHome(color: Colors.teal[400]),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ContainerHome(color: Colors.orange[300]),
-                  ContainerHome(color: Colors.purple[400]),
+                  ContainerHome(
+                    title: 'Total Users',
+                    value: cardValue(totalUsers),
+                    icon: Icons.people_outline,
+                    color: Colors.blue[300],
+                  ),
+                  ContainerHome(
+                    title: 'Total Products',
+                    value: cardValue(totalProducts),
+                    icon: Icons.inventory_2_outlined,
+                    color: Colors.teal[400],
+                  ),
+                  ContainerHome(
+                    title: 'Total Categories',
+                    value: cardValue(totalCategories),
+                    icon: Icons.category_outlined,
+                    color: Colors.orange[300],
+                  ),
                 ],
               ),
               SizedBox(height: 20),
