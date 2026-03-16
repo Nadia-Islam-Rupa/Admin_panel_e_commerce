@@ -1,4 +1,3 @@
-import 'package:admin_pannel/presentation/category/ui/edit_category.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -16,14 +15,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EditCategory(category: category),
-          ),
-        );
-      },
+      onTap: () {},
       child: SizedBox(
         width: 150,
         child: Card(
